@@ -1,0 +1,38 @@
+---
+# not needed on OpenStack images...
+#- name: Set hostname
+#  hostname: name={{ inventory_hostname }}
+#  tags: hostname
+#
+#- name: Add hostname to /etc/hosts
+#  lineinfile: dest=/etc/hosts insertafter=^127.0.0.1 line='127.0.1.1       {{ inventory_hostname }}'
+#  tags: hostname
+
+- include: packages_Ubuntu.yml
+  when: "ansible_distribution == 'Ubuntu'"
+  tags: packages
+
+- include: iptables_Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Reconfigure /etc/ssh/sshd_config
+  template: src=sshd_config_{{ansible_distribution}}-{{ansible_distribution_version}}.j2 dest=/etc/ssh/sshd_config owner=root group=root mode=0600
+  notify:
+  - restart sshd
+  tags: sshd
+
+- name: Reconfigure /etc/sysctl.conf
+  template: src=sysctl_{{ ansible_distribution }}.j2 dest=/etc/sysctl.conf owner=root group=root mode=0644
+  notify:
+  - reload sysctl
+  tags: sysctl
+
+- name: Reconfigure /etc/rc.local
+  when: "ansible_distribution == 'CentOS'"
+  template: src=rc.local_{{ ansible_distribution }}.j2 dest=/etc/rc.d/rc.local owner=root group=root mode=0755
+
+- name: Reconfigure /etc/rc.local
+  when: "ansible_distribution == 'Debian'"
+  template: src=rc.local_{{ ansible_distribution }}.j2 dest=/etc/rc.local owner=root group=root mode=0755
+
+# vim: set sw=2 ts=2:

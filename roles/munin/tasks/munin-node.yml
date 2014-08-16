@@ -1,0 +1,27 @@
+---
+- name: Install munin-node
+  action: "{{ ansible_pkg_mgr }} name={{ item }} state=latest"
+  with_items:
+    - munin-node
+
+# some nice things to have for munin-node on Ubuntu
+- name: Install munin-node deps
+  when: ansible_distribution == "Ubuntu"
+  apt: name={{ item }} state=present
+  with_items:
+    - libwww-perl #for munin's nginx_status check
+
+- name: Create munin-node.conf
+  template: src=munin-node.conf.j2 dest=/etc/munin/munin-node.conf
+  notify: 
+    - restart munin-node
+
+- name: Configure munin-node
+  shell: munin-node-configure --shell --families=contrib,auto | sh -x
+  notify:
+    - restart munin-node
+
+- name: Start munin-node
+  service: name=munin-node state=started enabled=true
+
+# vim: set ts=2 sw=2:

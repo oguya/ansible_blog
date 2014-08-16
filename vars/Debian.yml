@@ -1,0 +1,8 @@
+---
+
+# sshd service name is `ssh` on Debian/Ubuntu, but it's
+# `sshd` on CentOS
+sshd_service_name: ssh
+
+# default Kenyan Ubuntu mirror
+apt_mirror: ubuntu.mirror.ac.ke

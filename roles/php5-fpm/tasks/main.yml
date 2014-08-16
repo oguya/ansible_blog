@@ -1,0 +1,24 @@
+---
+- name: Install php5-fpm and deps 
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
+    - php5-fpm
+    # probably belong in wordpress role
+    - php5-mysql
+    - php5-gd
+    - php5-curl
+  tags: php5-fpm
+
+- name: Copy php5-fpm pool config
+  copy: src=www.conf dest=/etc/php5/fpm/pool.d/www.conf owner=root group=root mode=0644
+  notify: restart php5-fpm
+  tags: php5-fpm
+
+# re-configure php to only process exact paths, see:
+# http://codex.wordpress.org/Nginx
+- name: Update php.ini
+  lineinfile: dest=/etc/php5/fpm/php.ini regexp=^;cgi.fix_pathinfo line=cgi.fix_pathinfo=0
+  notify: restart php5-fpm
+  tags: php5-fpm
+
+# vim: set ts=2 sw=2:

@@ -1,0 +1,6 @@
+---
+- include: munin.yml
+  tags: munin
+
+- include: munin-node.yml
+  tags: munin-node
