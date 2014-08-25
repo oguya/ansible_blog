@@ -1,7 +1,7 @@
 ---
-# file: site.yml
+# file: web.yml
 
-- name: Configure mjanja.co.ke
+- name: Configure web servers
   hosts: web
   sudo: yes
   roles:
@@ -11,7 +11,5 @@
     - php5-fpm
 #    - wordpress
     - munin
-  vars_files:
-    - "vars/{{ ansible_os_family }}.yml"
 
 # vim: set sw=2 ts=2:
