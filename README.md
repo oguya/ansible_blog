@@ -27,4 +27,4 @@ A simple way to test locally in a virtual machine using libvirt + KVM:
 sudo virt-install -n web01 -r 1024 --vcpus 2 -l http://ubuntu.mirror.ac.ke/ubuntu/dists/trusty/main/installer-amd64/ --os-type=linux --os-variant=ubuntusaucy --disk /home/aorth/software/vms/web01.qcow2,device=disk,bus=virtio,format=qcow2,size=40 --vnc --cpuset=1,2 -x "auto=true priority=critical url=http://blah.com/~aorth/preseed/public/ubuntu-14.04.cfg"
 ```
 
-This boots from a network Ubuntu mirror, then uses a preseed to automate the OS installtion.
+This boots from a network Ubuntu mirror, then uses a preseed to automate the OS installation.
