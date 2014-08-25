@@ -3,7 +3,7 @@ Playbook for base and initial configuration of web server hosting my personal we
 ### To use
 Create a new Ubuntu 14.04 host, add a user account, copy your SSH public key, then execute:
 
-    ansible-playbook site.yml -i hosts -K
+    ansible-playbook site.yml -i hosts --limit=web01 -K
 
 ### Testing
 For testing, use a VM, ie with KVM and libvirt:
