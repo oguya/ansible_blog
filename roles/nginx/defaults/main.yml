@@ -1,0 +1,10 @@
+---
+# file: roles/nginx/defaults/main.yml
+
+# path config
+nginx_confd_path: /etc/nginx/conf.d
+
+# parent directory of vhost roots
+nginx_root_prefix: /var/www
+
+# vim: set ts=2 sw=2:
