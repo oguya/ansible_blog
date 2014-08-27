@@ -23,14 +23,16 @@
   file: path=/etc/nginx/conf.d/default.conf state=absent
   tags: nginx
 
-# need to modularize so we can have different vhosts in different files (apples.com and bananas.com in separate config files)
 - name: Configure nginx vhosts
-  template: src={{ item }} dest=/etc/nginx/conf.d/{{ inventory_hostname }}.conf mode=0644 owner=root group=root
-  with_first_found:
-    - "../templates/{{ inventory_hostname }}.conf.j2"
-    - "../templates/default.conf.j2"
+  template: src=vhost.conf.j2 dest={{ nginx_confd_path }}/{{ item.nginx_domain_name }}.conf mode=0644 owner=root group=root
+  with_items: nginx_vhosts
   notify:
     - reload nginx
+  tags: nginx
+
+- name: Create vhost document roots
+  file: path={{ nginx_root_prefix }}/{{ item.nginx_domain_name }} state=directory mode=0755 owner=nginx group=nginx
+  with_items: nginx_vhosts
   tags: nginx
 
 - name: Configure munin vhost

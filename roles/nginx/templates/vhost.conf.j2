@@ -1,16 +1,17 @@
+{% set domain_name      = item.nginx_domain_name %}
+{% set domain_aliases   = item.nginx_domain_aliases | default("") %}
+
 server {
-    listen 80 default_server;
-    listen [::]:80 default_server ipv6only=on;
+    listen 80;
 
-    root /usr/share/nginx/html;
+    root {{ nginx_root_prefix }}/{{ domain_name }};
 
-    server_name web01.mjanja.co.ke;
+    server_name {{ domain_name }} {{ domain_aliases }};
 
     location / {
         try_files $uri $uri/ =404;
     }
 
-    error_page 404 /404.html;
     error_page 500 502 503 504 /50x.html;
     location = /50x.html {
         root /usr/share/nginx/html;
@@ -26,7 +27,7 @@ server {
         #NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
 
-        fastcgi_pass php5-fpm-sock;
+        fastcgi_pass unix:/var/run/php5-fpm-{{ domain_name }}.sock;
         fastcgi_index index.php;
         # set script path relative to document root in server block
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
