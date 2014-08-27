@@ -11,7 +11,7 @@
   apt: name={{ item }} state=present update_cache=yes
   with_items:
     - mariadb-server
-    # - python-mysqldb # for ansible
+    - python-mysqldb # for ansible
   tags: mariadb
 
 - name: Start and enable MariaDB Service
