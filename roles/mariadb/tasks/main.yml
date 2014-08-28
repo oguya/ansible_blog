@@ -33,4 +33,14 @@
   template: src=.my.cnf.j2 dest=/root/.my.cnf owner=root mode=0600
   tags: mariadb
 
+- name: Create WordPress database(s)
+  mysql_db: db={{ item.wordpress_db_name }} state=present
+  with_items: wordpress_blogs
+  tags: mariadb
+
+- name: Create WordPress user(s)
+  mysql_user: name={{ item.wordpress_db_user }} password={{ item.wordpress_db_pass }} priv={{ item.wordpress_db_name }}.*:ALL state=present
+  with_items: wordpress_blogs
+  tags: mariadb
+
 # vim: set ts=2 sw=2:
