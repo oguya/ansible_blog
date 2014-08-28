@@ -8,6 +8,8 @@ server {
 
     server_name {{ domain_name }} {{ domain_aliases }};
 
+    index index.php index.html;
+
     access_log  /var/log/nginx/{{ domain_name }}-access.log;
     error_log   /var/log/nginx/{{ domain_name }}-error.log;
 
