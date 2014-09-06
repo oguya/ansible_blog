@@ -7,4 +7,7 @@ nginx_confd_path: /etc/nginx/conf.d
 # parent directory of vhost roots
 nginx_root_prefix: /var/www
 
+# TLS protocol versions to support
+nginx_tls_protocols: TLSv1 TLSv1.1 TLSv1.2
+
 # vim: set ts=2 sw=2:

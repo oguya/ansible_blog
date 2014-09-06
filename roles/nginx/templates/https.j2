@@ -1,0 +1,16 @@
+{% set tls_cert         = item.tls_cert %}
+{% set tls_key          = item.tls_key %}
+
+    ssl_certificate {{ tls_cert }};
+    ssl_certificate_key {{ tls_key }};
+
+    ssl_session_timeout 5m;
+    ssl_session_cache shared:SSL:1m;
+    ssl_dhparam /etc/ssl/certs/dhparam.pem;
+    ssl_protocols {{ nginx_tls_protocols }};
+    ssl_ciphers "{{ tls_cipher_suite }}";
+    ssl_prefer_server_ciphers on;
+
+    # Enable this if you want HSTS (recommended, but be careful)
+    #add_header Strict-Transport-Security max-age=15768000;
+
