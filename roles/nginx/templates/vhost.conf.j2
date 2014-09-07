@@ -1,6 +1,7 @@
 {% set domain_name      = item.nginx_domain_name %}
 {% set domain_aliases   = item.nginx_domain_aliases | default("") %}
 {% set use_https        = item.use_https | default("no") %}
+{% set has_wordpress    = item.has_wordpress | default("no") %}
 
 {% if use_https == "yes" %}
 # http -> https vhost
@@ -34,9 +35,9 @@ server {
         {% include 'https.j2' %}
     {% endif %}
 
-    location / {
-        try_files $uri $uri/ =404;
-    }
+    {% if has_wordpress == "yes" %}
+        {% include 'wordpress.j2' %}
+    {% endif %}
 
     error_page 500 502 503 504 /50x.html;
     location = /50x.html {
