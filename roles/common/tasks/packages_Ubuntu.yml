@@ -26,6 +26,7 @@
     - sysv-rc-conf
     - lzop
     - vim
+    - lrzip
 
 - name: Security hardening (CIS Benchmark 1.0)
   apt: pkg={{ item }} state=absent purge=yes
