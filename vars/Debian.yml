@@ -6,3 +6,5 @@ sshd_service_name: ssh
 
 # default Kenyan Ubuntu mirror
 apt_mirror: ke.archive.ubuntu.com
+
+# vim: set ts=2 sw=2:
