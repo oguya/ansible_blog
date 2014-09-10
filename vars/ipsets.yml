@@ -1,0 +1,6 @@
+---
+
+ghetto_ipsets:
+  public: { src: '0.0.0.0/0' }
+
+# vim: set ts=2 sw=2:
