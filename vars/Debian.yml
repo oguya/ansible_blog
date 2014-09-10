@@ -5,4 +5,4 @@
 sshd_service_name: ssh
 
 # default Kenyan Ubuntu mirror
-apt_mirror: ubuntu.mirror.ac.ke
+apt_mirror: ke.archive.ubuntu.com
