@@ -1,0 +1,13 @@
+---
+
+- name: Configure http vhosts
+  template: src=vhost.conf.j2 dest={{ nginx_confd_path }}/{{ item.nginx_domain_name }}.conf mode=0644 owner=root group=root
+  with_items: nginx_vhosts
+  notify:
+    - reload nginx
+
+- name: Create vhost document roots
+  file: path={{ nginx_root_prefix }}/{{ item.nginx_domain_name }} state=directory mode=0755 owner=nginx group=nginx
+  with_items: nginx_vhosts
+
+# vim: set ts=2 sw=2:

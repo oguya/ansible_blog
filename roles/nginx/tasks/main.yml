@@ -23,26 +23,18 @@
   file: path=/etc/nginx/conf.d/default.conf state=absent
   tags: nginx
 
-- name: Configure nginx vhosts
-  template: src=vhost.conf.j2 dest={{ nginx_confd_path }}/{{ item.nginx_domain_name }}.conf mode=0644 owner=root group=root
-  with_items: nginx_vhosts
-  notify:
-    - reload nginx
+- include: vhosts.yml
+  when: nginx_vhosts is defined
   tags: nginx
 
-- name: Create vhost document roots
-  file: path={{ nginx_root_prefix }}/{{ item.nginx_domain_name }} state=directory mode=0755 owner=nginx group=nginx
-  with_items: nginx_vhosts
+- include: tls_vhosts.yml
+  when: nginx_tls_vhosts is defined
   tags: nginx
 
 - name: Configure munin vhost
   copy: src=munin.conf dest=/etc/nginx/conf.d/munin.conf mode=0644 owner=root group=root
   notify:
     - reload nginx
-  tags: nginx
-
-- name: Generate 2048-bit dhparam
-  command: openssl dhparam -out dhparam.pem 2048 chdir=/etc/ssl/certs creates=dhparam.pem
   tags: nginx
 
 - name: Start & enable nginx service

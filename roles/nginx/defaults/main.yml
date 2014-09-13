@@ -10,4 +10,7 @@ nginx_root_prefix: /var/www
 # TLS protocol versions to support
 nginx_tls_protocols: TLSv1 TLSv1.1 TLSv1.2
 
+# TLS key directory
+tls_key_dir: /etc/ssl/private
+
 # vim: set ts=2 sw=2:
