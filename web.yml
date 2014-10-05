@@ -3,6 +3,7 @@
 
 - name: Configure web servers
   hosts: web
+  user: ubuntu
   sudo: yes
   roles:
     - common
