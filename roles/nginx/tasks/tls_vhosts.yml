@@ -9,7 +9,7 @@
 # concatenated key + cert, can live in the same file
 # See: http://nginx.org/en/docs/http/configuring_https_servers.html
 - name: Copy TLS certs
-  copy: content="{{ item.tls_cert }}" dest={{ tls_key_dir }}/{{ item.nginx_domain_name }}.crt.pem mode=0700 owner=root group=root
+  copy: { dest: "{{ tls_key_dir }}/{{ item.nginx_domain_name }}.crt.pem", content: "{{ item.tls_cert }}", mode: 0700, owner: 'root', group: 'root' }
   with_items: nginx_tls_vhosts
   notify:
     - reload nginx
