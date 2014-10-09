@@ -8,7 +8,7 @@ nginx_confd_path: /etc/nginx/conf.d
 nginx_root_prefix: /var/www
 
 # TLS protocol versions to support
-nginx_tls_protocols: TLSv1.1 TLSv1.2
+nginx_tls_protocols: TLSv1 TLSv1.1 TLSv1.2
 
 # TLS key directory
 tls_key_dir: /etc/ssl/private
