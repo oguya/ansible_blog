@@ -5,6 +5,11 @@
         try_files $uri $uri/ /index.php?$args;
     }
 
+    location ~* \.(?:ico|css|js|gif|jpe?g|png)$ {
+        expires 7d;
+        add_header Cache-Control "must-revalidate";
+    }   
+
     # Add trailing slash to */wp-admin requests.
     rewrite /wp-admin$ $scheme://$host$uri/ permanent;
 
