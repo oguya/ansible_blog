@@ -3,7 +3,7 @@
 
 - name: Configure web servers
   hosts: web
-  user: ubuntu
+  user: provisioning
   sudo: yes
   roles:
     - common
@@ -13,6 +13,7 @@
     - munin
   vars_files:
     - vars/ipsets.yml
+    - vars/provisioning.yml
     - "vars/{{ ansible_os_family }}.yml"
 
 # vim: set sw=2 ts=2:
