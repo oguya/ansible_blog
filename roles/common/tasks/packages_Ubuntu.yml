@@ -42,9 +42,6 @@
     - command-not-found-data
     - python3-commandnotfound
 
-- name: Remove irqbalance
-  apt: pkg=irqbalance state=absent purge=yes
-
 - name: Configure cron-apt (config)
   copy: src=cron-apt/config dest=/etc/cron-apt/config mode=0644 owner=root group=root
 
