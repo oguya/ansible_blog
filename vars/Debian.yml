@@ -4,7 +4,7 @@
 # `sshd` on CentOS
 sshd_service_name: ssh
 
-# default Kenyan Ubuntu mirror
-apt_mirror: ubuntu.mirror.ac.ke
+# default mirror
+apt_mirror: mirrors.linode.com
 
 # vim: set ts=2 sw=2:
