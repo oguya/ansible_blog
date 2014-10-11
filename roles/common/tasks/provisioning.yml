@@ -1,0 +1,7 @@
+---
+# provisioning user should already exist on host, so just update the settings
+# we want to manage.
+- name: Set password, shell, etc for provisioning user
+  user: { name: '{{ provisioning_user.name }}', password: '{{ provisioning_user.password }}', shell: '{{ provisioning_user.shell }}', state: '{{ provisioning_user.state }}', createhome: 'no' }
+
+# vim: set ts=2 sw=2:

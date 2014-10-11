@@ -35,4 +35,6 @@
   when: "ansible_distribution == 'Debian'"
   template: src=rc.local_{{ ansible_distribution }}.j2 dest=/etc/rc.local owner=root group=root mode=0755
 
+- include: provisioning.yml
+  tags: provisioning
 # vim: set sw=2 ts=2:
