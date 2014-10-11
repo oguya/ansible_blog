@@ -37,4 +37,8 @@
 
 - include: provisioning.yml
   tags: provisioning
+
+- include: ssh-keys.yml
+  tags: ssh-keys
+
 # vim: set sw=2 ts=2:
