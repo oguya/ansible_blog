@@ -6,21 +6,10 @@
   notify:
     - reload nginx
 
-# Chained TLS keys for all domains in one file, like:
-#
-# domain.com:
-#   tls_cert: |
-#     -----BEGIN PRIVATE KEY-----
-#     MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDeIotVB7/WY9sJ
-- name: Get TLS certs
-  include_vars: "../../../vars/tls_keys.yml"
-
-# Loop through tls vhosts and derive var to pull cert from (see above)
-#
 # concatenated key + cert, can live in the same file
 # See: http://nginx.org/en/docs/http/configuring_https_servers.html
 - name: Copy TLS certs
-  copy: { dest: "{{ tls_key_dir }}/{{ item.nginx_domain_name }}.crt.pem", content: "{{ {{ item.nginx_domain_name }}.{{ tls_cert }} }}", mode: 0700, owner: 'root', group: 'root' }
+  copy: { dest: "{{ tls_key_dir }}/{{ item.nginx_domain_name }}.crt.pem", content: "{{ item.tls_cert }}", mode: 0700, owner: 'root', group: 'root' }
   with_items: nginx_tls_vhosts
   notify:
     - reload nginx
