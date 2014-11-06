@@ -1,6 +1,7 @@
 
     # try for WordPress index.php in /
     # fall back to index.php + args (passed to php5-fpm later)
+    # also serves static files from the disk instead of passing to interpreter,
     location / {
         try_files $uri $uri/ /index.php?$args;
     }
