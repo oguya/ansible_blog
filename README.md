@@ -20,7 +20,7 @@ Once you've satisfied the the above assumptions, you can execute:
 
     ansible-playbook web.yml -i hosts -K
 
-### Testing in a VM
+### Testing in a VM (KVM)
 A simple way to test locally in a virtual machine using libvirt + KVM:
 
 ```console
@@ -28,3 +28,25 @@ sudo virt-install -n web01 -r 1024 --vcpus 2 -l http://ubuntu.mirror.ac.ke/ubunt
 ```
 
 This boots from a network Ubuntu mirror, then uses a preseed to automate the OS installation.
+
+### Testing in Vagrant
+Not as simple as on GNU/Linux with KVM, but still easy:
+
+```console
+vagrant init ubuntu/trusty64
+```
+
+Then uncomment the following line in your `Vagrantfile`:
+
+```ruby
+# Create a public network, which generally matched to bridged network.
+# Bridged networks make the machine appear as another physical device on
+# your network.
+config.vm.network "public_network"
+```
+
+And finally, bring the machine up:
+
+```console
+vagrant up
+```
