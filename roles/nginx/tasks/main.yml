@@ -4,7 +4,7 @@
   tags: nginx
 
 - name: Add nginx.org stable repo
-  apt_repository: repo="deb http://nginx.org/packages/ubuntu/ {{ ansible_distribution_release }} nginx" state=present
+  apt_repository: repo="deb http://nginx.org/packages/mainline/ubuntu/ {{ ansible_distribution_release }} nginx" state=present
   tags: nginx
 
 - name: Install nginx
