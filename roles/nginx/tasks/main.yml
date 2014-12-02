@@ -8,7 +8,7 @@
   tags: nginx
 
 - name: Install nginx
-  apt: pkg=nginx update_cache=yes
+  apt: pkg=nginx update_cache=yes state=latest
   tags: nginx
 
 - name: Copy nginx config
