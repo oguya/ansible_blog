@@ -14,6 +14,11 @@
     ssl_ciphers "{{ tls_cipher_suite }}";
     ssl_prefer_server_ciphers on;
 
+    # OCSP stapling...
+    ssl_stapling on;
+    ssl_stapling_verify on;
+    resolver 8.8.4.4;
+
     # nginx does not auto-rotate session ticket keys: only a HUP / restart will do so and
     # when a restart is performed the previous key is lost, which resets all previous
     # sessions. The fix for this is to setup a manual rotation mechanism:
