@@ -23,6 +23,9 @@
     # of such infrastructure, consider turning off session tickets:
     ssl_session_tickets off;
 
+    # enable SPDY header compression
+    spdy_headers_comp 6;
+
     # Enable this if you want HSTS (recommended, but be careful)
     add_header Strict-Transport-Security max-age=15768000;
 
