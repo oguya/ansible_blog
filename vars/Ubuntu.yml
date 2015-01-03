@@ -4,7 +4,4 @@
 # `sshd` on CentOS
 sshd_service_name: ssh
 
-# default mirror
-apt_mirror: mirrors.linode.com
-
 # vim: set ts=2 sw=2:
