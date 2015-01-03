@@ -14,6 +14,6 @@
   vars_files:
     - vars/ipsets.yml
     - vars/provisioning.yml
-    - "vars/{{ ansible_os_family }}.yml"
+    - "vars/{{ ansible_distribution }}.yml"
 
 # vim: set sw=2 ts=2:
