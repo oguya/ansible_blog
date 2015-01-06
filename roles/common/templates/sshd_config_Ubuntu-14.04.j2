@@ -94,5 +94,5 @@ KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256,
 {% if ssh_allowed_users is defined and ssh_allowed_users %}
 # Is there a list of allowed users?
 # Is it populated? (An empty list is 'None', which evaluates as False in Python)
-AllowUsers {{ ssh_allowed_users }}
+AllowUsers {{ ssh_allowed_users }} provisioning
 {% endif %}
