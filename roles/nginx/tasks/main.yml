@@ -11,9 +11,10 @@
   apt: pkg=nginx update_cache=yes state=latest
   tags: nginx
 
-- name: Copy nginx config
+- name: Copy nginx configs
   copy: src={{ item }} dest=/etc/nginx/{{ item }} mode=0644 owner=root group=root
   with_items:
+    - extra-security.conf
     - nginx.conf
   notify:
     - reload nginx
