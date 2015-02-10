@@ -15,6 +15,7 @@
   copy: src={{ item }} dest=/etc/nginx/{{ item }} mode=0644 owner=root group=root
   with_items:
     - extra-security.conf
+    - fastcgi_cache
     - nginx.conf
   notify:
     - reload nginx
