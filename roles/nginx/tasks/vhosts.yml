@@ -10,4 +10,10 @@
   file: path={{ nginx_root_prefix }}/{{ item.nginx_domain_name }} state=directory mode=0755 owner=nginx group=nginx
   with_items: nginx_vhosts
 
+- name: Install WordPress
+  git: repo=https://github.com/WordPress/WordPress.git dest={{ nginx_root_prefix }}/{{ item.nginx_domain_name }}/wordpress version={{ item.wordpress_version }}
+  when: item.has_wordpress == 'yes'
+  with_items: nginx_vhosts
+  tags: wordpress
+
 # vim: set ts=2 sw=2:

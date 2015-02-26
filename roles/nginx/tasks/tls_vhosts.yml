@@ -11,9 +11,13 @@
 - name: Copy TLS certs
   copy: { dest: "{{ tls_key_dir }}/{{ item.nginx_domain_name }}.crt.pem", content: "{{ item.tls_cert }}", mode: 0700, owner: 'root', group: 'root' }
   with_items: nginx_tls_vhosts
+  when: tls_cert is defined
   notify:
     - reload nginx
 
+#- name: Generate self-signed TLS cert
+#  command: openssl req -x509 -nodes -sha256 -days 365 -subj "/C=KE/ST=Nairobi/L=Nairobi/O=/CN={{ item.nginx_domain_name }}" -newkey rsa:2048 -keyout {{ item.nginx_domain_name }}.key -out {{ item.nginx_domain_name }}.crt -extensions v3_ca creates={{ tls_key_dir }}/{{ item.nginx_domain_name }}.crt.pem
+#
 - name: Generate 2048-bit dhparam
   command: openssl dhparam -out dhparam.pem 2048 chdir=/etc/ssl/certs creates=dhparam.pem
   notify:
@@ -22,5 +26,11 @@
 - name: Create vhost document roots
   file: path={{ nginx_root_prefix }}/{{ item.nginx_domain_name }} state=directory mode=0755 owner=nginx group=nginx
   with_items: nginx_tls_vhosts
+
+- name: Install WordPress
+  git: repo=https://github.com/WordPress/WordPress.git dest={{ nginx_root_prefix }}/{{ item.nginx_domain_name }}/wordpress version={{ item.wordpress_version }}
+  when: item.has_wordpress == 'yes'
+  with_items: nginx_tls_vhosts
+  tags: wordpress
 
 # vim: set ts=2 sw=2:
