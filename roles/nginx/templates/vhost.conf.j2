@@ -61,7 +61,8 @@ server {
         include fastcgi_params;
 
         fastcgi_cache global;
-        fastcgi_cache_valid any 1h;
+        # HTTP responses to cache (default 200, 301, 302)
+        fastcgi_cache_valid 1h;
         # Allow use of stale entries if the cache is updating
         fastcgi_cache_use_stale updating;
         # Set X-Fastcgi-Cache header to "HIT", "MISS", "BYPASS", etc
