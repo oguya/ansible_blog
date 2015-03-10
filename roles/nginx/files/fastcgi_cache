@@ -2,3 +2,7 @@ fastcgi_cache_key $scheme$request_method$host$request_uri;
 # According to the docs, a 1m key zone can store ~8,000 keys, so 10m should
 # be enough. See: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html
 fastcgi_cache_path /var/cache/nginx/cached/fastcgi levels=2:2 keys_zone=global:10m inactive=60m max_size=1G;
+# HTTP responses to cache (default 200, 301, 302)
+fastcgi_cache_valid 1h;
+# Allow use of stale entries if the cache is updating
+fastcgi_cache_use_stale updating;
