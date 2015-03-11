@@ -64,20 +64,20 @@ server {
         # Set X-Fastcgi-Cache header to "HIT", "MISS", "BYPASS", etc
         add_header X-Fastcgi-Cache $upstream_cache_status;
         # Don't cache when user shift-refreshes (Pragma: no-cache) or when a user is logged in!
-        fastcgi_cache_bypass $http_pragma $logged_in;
-        fastcgi_no_cache $http_pragma $logged_in;
+        fastcgi_cache_bypass $http_pragma $wordpress_logged_in;
+        fastcgi_no_cache $http_pragma $wordpress_logged_in;
     }
 
     include extra-security.conf;
 }
 
 # Check if a user is logged in
-# if so, set $logged_in = 1
-# otherwise, set $logged_in = 0
+# if so, set $wordpress_logged_in = 1
+# otherwise, set $wordpress_logged_in = 0
 # See: http://jeradbitner.com/2012/02/nginx-do-not-cache-logged-in-drupal-or-wordpress-users/
 # See: http://syshero.org/post/50053543196/disable-nginx-cache-based-on-cookies
 # See nginx bug: http://trac.nginx.org/nginx/ticket/707
-map $http_cookie $logged_in {
+map $http_cookie $wordpress_logged_in {
     default 0;
 
     ~wordpress_logged_in 1;
