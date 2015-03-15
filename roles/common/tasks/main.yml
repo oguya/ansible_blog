@@ -18,7 +18,7 @@
 - name: Reconfigure /etc/ssh/sshd_config
   template: src=sshd_config_{{ansible_distribution}}-{{ansible_distribution_version}}.j2 dest=/etc/ssh/sshd_config owner=root group=root mode=0600
   notify:
-  - restart sshd
+    - restart sshd
   tags: sshd
 
 - name: Remove DSA and ECDSA host keys
@@ -35,7 +35,7 @@
 - name: Reconfigure /etc/sysctl.conf
   template: src=sysctl_{{ ansible_distribution }}.j2 dest=/etc/sysctl.conf owner=root group=root mode=0644
   notify:
-  - reload sysctl
+    - reload sysctl
   tags: sysctl
 
 - name: Reconfigure /etc/rc.local
