@@ -11,9 +11,4 @@
 #
 # By default this script does nothing.
 
-# VMs should use deadline IO sched
-{% for device in ansible_devices %}
-echo deadline > /sys/block/{{ device }}/queue/scheduler
-{% endfor %}
-
 exit 0
