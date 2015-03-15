@@ -96,3 +96,10 @@ net.ipv4.tcp_congestion_control=htcp
 {% endif %}
 # recommended for hosts with jumbo frames enabled
 #net.ipv4.tcp_mtu_probing=1
+
+# increase quadruplets (src ip, src port, dest ip, dest port)
+# see: http://vincent.bernat.im/en/blog/2014-tcp-time-wait-state-linux.html
+net.ipv4.ip_local_port_range = 10240 65535
+# recommended for web servers, especially if running SPDY
+# see: http://www.chromium.org/spdy/spdy-best-practices
+net.ipv4.tcp_slow_start_after_idle = 0
