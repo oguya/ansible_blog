@@ -40,7 +40,7 @@
   tags: sysctl
 
 - name: Reconfigure /etc/rc.local
-  when: ansible_distribution == 'Debian'
+  when: ansible_distribution == 'Ubuntu'
   template: src=rc.local_{{ ansible_distribution }}.j2 dest=/etc/rc.local owner=root group=root mode=0755
 
 - include: ssh-keys.yml
