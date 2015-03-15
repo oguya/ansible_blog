@@ -89,11 +89,6 @@ net.ipv4.tcp_rmem = 4096 87380 16777216
 net.ipv4.tcp_wmem = 4096 65536 16777216
 # increase the length of the processor input queue
 net.core.netdev_max_backlog = 30000
-{# Linode kernels don't have htcp, and kernels after 2.6.32 don't have buggy cubic #}
-{% if "linode" not in ansible_kernel and ansible_kernel < "2.6.33" %}
-# recommended default congestion control is htcp 
-net.ipv4.tcp_congestion_control=htcp
-{% endif %}
 # recommended for hosts with jumbo frames enabled
 #net.ipv4.tcp_mtu_probing=1
 
