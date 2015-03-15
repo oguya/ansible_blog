@@ -14,6 +14,7 @@
 
 - include: iptables_Debian.yml
   when: ansible_os_family == 'Debian'
+  tags: firewall
 
 - name: Reconfigure /etc/ssh/sshd_config
   template: src=sshd_config_{{ansible_distribution}}-{{ansible_distribution_version}}.j2 dest=/etc/ssh/sshd_config owner=root group=root mode=0600
