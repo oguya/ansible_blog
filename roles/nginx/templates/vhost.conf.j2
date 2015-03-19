@@ -66,6 +66,11 @@ server {
         # Don't cache when user shift-refreshes (Pragma: no-cache) or when a user is logged in!
         fastcgi_cache_bypass $http_pragma $wordpress_logged_in;
         fastcgi_no_cache $http_pragma $wordpress_logged_in;
+
+        {% if use_https == "yes" %}
+        # Enable this if you want HSTS (recommended, but be careful)
+        add_header Strict-Transport-Security max-age=15768000 always;
+        {% endif %}
     }
 
     include extra-security.conf;
