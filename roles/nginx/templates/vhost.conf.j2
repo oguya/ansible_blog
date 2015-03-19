@@ -71,6 +71,8 @@ server {
         # Enable this if you want HSTS (recommended, but be careful)
         add_header Strict-Transport-Security max-age=15768000 always;
         {% endif %}
+
+        include extra-security.conf;
     }
 
     include extra-security.conf;
