@@ -14,13 +14,10 @@
     ssl_ciphers "{{ tls_cipher_suite }}";
     ssl_prefer_server_ciphers on;
 
-{# don't use OCSP stapling if we're using a self-signed cert #}
-{% if tls_cert is defined %}
     # OCSP stapling...
     ssl_stapling on;
     ssl_stapling_verify on;
     resolver 208.67.222.222 208.67.220.220;
-{% endif %}
 
     # nginx does not auto-rotate session ticket keys: only a HUP / restart will do so and
     # when a restart is performed the previous key is lost, which resets all previous
