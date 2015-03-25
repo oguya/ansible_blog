@@ -3,7 +3,7 @@
   apt_key: url=http://nginx.org/keys/nginx_signing.key state=present
   tags: nginx
 
-- name: Add nginx.org stable repo
+- name: Add nginx.org mainline repo
   apt_repository: repo="deb http://nginx.org/packages/mainline/ubuntu/ {{ ansible_distribution_release }} nginx" state=present
   tags: nginx
 
