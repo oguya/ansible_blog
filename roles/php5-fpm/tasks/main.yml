@@ -23,10 +23,9 @@
   notify: restart php5-fpm
   tags: php5-fpm
 
-# re-configure php to only process exact paths, see:
-# http://codex.wordpress.org/Nginx
+# re-configure php.ini
 - name: Update php.ini
-  replace: dest=/etc/php5/fpm/php.ini regexp='^;cgi\.fix_pathinfo=0$' replace='cgi.fix_pathinfo=0'
+  template: src=php.ini.j2 dest=/etc/php5/fpm/php.ini owner=root group=root mode=0644
   notify: restart php5-fpm
   tags: php5-fpm
 
