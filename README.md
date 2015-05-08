@@ -1,8 +1,8 @@
-# Ansible Playbook
+## Ansible Playbook
 
 Ansible playbook for base and initial configuration of web server hosting my personal websites.  After successful execution of this playbook, however, there is still some manual work to import databases, copy site content, etc.
 
-## Assumptions
+### Assumptions
 Before you can run this, a few things are assumed:
 
 - You have a clean, minimal Ubuntu 14.04 host up and running
@@ -15,7 +15,7 @@ Before you can run this, a few things are assumed:
 web01
 ```
 
-## Use
+### Use
 Once you've satisfied the the above assumptions, you can execute:
 
     ansible-playbook web.yml -i hosts -K
