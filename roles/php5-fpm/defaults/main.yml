@@ -7,8 +7,8 @@ cgi_fix_pathinfo: 0
 # some sane defaults for PHP 5.5+ Opcache
 # see: https://php.net/manual/en/opcache.installation.php
 opcache_enable: 1
-opcache_enable_cli: 1
-opcache_memory_consumption: 128
+opcache_enable_cli: 0
+opcache_memory_consumption: 72
 opcache_interned_strings_buffer: 8
 opcache_max_accelerated_files: 4000
 opcache_use_cwd: 1
