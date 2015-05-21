@@ -7,6 +7,7 @@
 # http -> https vhost
 server {
     listen 80;
+    listen [::]:80;
     server_name {{ domain_name }} {{ domain_aliases }};
 
     # redirect http -> https
@@ -20,6 +21,7 @@ server {
 
 server {
     listen {% if use_https == "yes" %} 443 ssl spdy{% else %} 80{% endif %};
+    listen [::]{% if use_https == "yes" %}:443 ssl spdy{% else %}:80{% endif %};
 
     root {{ nginx_root_prefix }}/{{ domain_name }};
 
