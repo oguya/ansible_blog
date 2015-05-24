@@ -3,12 +3,8 @@
   apt_key: url=http://nginx.org/keys/nginx_signing.key state=present
   tags: nginx
 
-- name: Add nginx.org mainline repo
-  apt_repository: repo="deb http://nginx.org/packages/mainline/ubuntu/ {{ ansible_distribution_release }} nginx" state=absent
-  tags: nginx
-
-- name: Add nginx.org stable repo
-  apt_repository: repo="deb http://nginx.org/packages/ubuntu/ {{ ansible_distribution_release }} nginx" state=present
+- name: Add nginx.org repo
+  template: src=nginx_org_packages_ubuntu.list.j2 dest=/etc/apt/sources.list.d/nginx_org_packages_ubuntu.list owner=root group=root mode=0644
   tags: nginx
 
 - name: Install nginx

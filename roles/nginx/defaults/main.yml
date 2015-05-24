@@ -13,4 +13,8 @@ nginx_tls_protocols: TLSv1 TLSv1.1 TLSv1.2
 # TLS key directory
 tls_key_dir: /etc/ssl/private
 
+# stable is 1.8.x
+# mainline is 1.9.x
+nginx_version: mainline
+
 # vim: set ts=2 sw=2:
