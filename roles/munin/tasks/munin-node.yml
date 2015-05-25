@@ -1,6 +1,7 @@
 ---
 - name: Install munin-node
-  action: "{{ ansible_pkg_mgr }} name={{ item }} state=latest"
+  apt: name={{ item }} state=latest
+  when: ansible_distribution == "Ubuntu"
   with_items:
     - munin-node
 
