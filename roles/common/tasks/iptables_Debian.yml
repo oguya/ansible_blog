@@ -6,3 +6,8 @@
   template: src=iptables.j2 dest=/etc/iptables/rules.v4 owner=root mode=0600
   notify:
     - restart iptables-persistent
+
+- name: Copy /etc/iptables/rules.v6
+  template: src=ip6tables.j2 dest=/etc/iptables/rules.v6 owner=root group=root mode=0600
+  notify:
+    - restart iptables-persistent
