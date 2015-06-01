@@ -28,7 +28,7 @@
   with_items: nginx_tls_vhosts
 
 - name: Install WordPress
-  git: repo=https://github.com/WordPress/WordPress.git dest={{ nginx_root_prefix }}/{{ item.nginx_domain_name }}/wordpress version={{ item.wordpress_version }}
+  git: repo=https://github.com/WordPress/WordPress.git dest={{ nginx_root_prefix }}/{{ item.nginx_domain_name }}/wordpress version={{ item.wordpress_version }} depth=1
   when: item.has_wordpress == 'yes'
   with_items: nginx_tls_vhosts
   tags: wordpress
