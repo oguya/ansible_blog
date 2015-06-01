@@ -11,7 +11,7 @@
 - name: Copy TLS certs
   copy: { dest: "{{ tls_key_dir }}/{{ item.nginx_domain_name }}.crt.pem", content: "{{ item.tls_cert }}", mode: 0700, owner: 'root', group: 'root' }
   with_items: nginx_tls_vhosts
-  when: tls_cert is defined
+  when: item.tls_cert is defined
   notify:
     - reload nginx
 
