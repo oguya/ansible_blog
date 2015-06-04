@@ -5,12 +5,12 @@
     ssl_certificate {{ tls_key_dir }}/{{ domain_name }}.crt.pem;
     ssl_certificate_key {{ tls_key_dir }}/{{ domain_name }}.crt.pem;
 
-    ssl_session_timeout 24h;            # 24 hour timeout
-    ssl_session_cache shared:SSL:1m;    # 1MB -> 4,000 sessions
-    ssl_buffer_size 1400;               # 1400 bytes to fit in one MTU
+    ssl_session_timeout {{ nginx_ssl_session_timeout }};
+    ssl_session_cache {{ nginx_ssl_session_cache }};
+    ssl_buffer_size {{ nginx_ssl_buffer_size }};
 
-    ssl_dhparam /etc/ssl/certs/dhparam.pem;
-    ssl_protocols {{ nginx_tls_protocols }};
+    ssl_dhparam {{ nginx_ssl_dhparam }};
+    ssl_protocols {{ nginx_ssl_protocols }};
     ssl_ciphers "{{ tls_cipher_suite }}";
     ssl_prefer_server_ciphers on;
 
@@ -29,9 +29,11 @@
     ssl_session_tickets off;
 
     # enable SPDY header compression
-    spdy_headers_comp 6;
+    spdy_headers_comp {{ nginx_spdy_headers_comp }};
 
+    {% if nginx_enable_hsts == True %}
     # Enable this if you want HSTS (recommended, but be careful)
     # Include all subdomains and indicate to Google that we want this pre-loaded in Chrome's HSTS store
     # See: https://hstspreload.appspot.com/
     add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload;" always;
+    {% endif %}
