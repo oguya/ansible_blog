@@ -18,23 +18,19 @@ web01
 ### Use
 Once you've satisfied the the above assumptions, you can execute:
 
-    ansible-playbook web.yml -i hosts -K
+    $ ansible-playbook web.yml -i hosts -K
 
 ### Testing in a VM (KVM)
 A simple way to test locally in a virtual machine using libvirt + KVM:
 
-```console
-sudo virt-install -n web01 -r 1024 --vcpus 2 -l http://ubuntu.mirror.ac.ke/ubuntu/dists/trusty/main/installer-amd64/ --os-type=linux --os-variant=ubuntusaucy --disk /home/aorth/software/vms/web01.qcow2,device=disk,bus=virtio,format=qcow2,size=40 --vnc --cpuset=1,2 -x "auto=true priority=critical url=http://blah.com/~aorth/preseed/public/ubuntu-14.04.cfg"
-```
+    $ sudo virt-install -n web01 -r 1024 --vcpus 2 -l http://ubuntu.mirror.ac.ke/ubuntu/dists/trusty/main/installer-amd64/ --os-type=linux --os-variant=ubuntusaucy --disk /home/aorth/software/vms/web01.qcow2,device=disk,bus=virtio,format=qcow2,size=40 --vnc --cpuset=1,2 -x "auto=true priority=critical url=http://blah.com/~aorth/preseed/public/ubuntu-14.04.cfg"
 
 This boots from a network Ubuntu mirror, then uses a preseed to automate the OS installation.
 
 ### Testing in Vagrant
 Not as simple as on GNU/Linux with KVM, but still easy:
 
-```console
-vagrant up
-```
+    $ vagrant up
 
 A new VirtualBox VM will come up with the IP 192.168.33.10 (according to the included `Vagrantfile`).
 
