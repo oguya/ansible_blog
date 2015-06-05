@@ -33,23 +33,10 @@ This boots from a network Ubuntu mirror, then uses a preseed to automate the OS 
 Not as simple as on GNU/Linux with KVM, but still easy:
 
 ```console
-vagrant init ubuntu/trusty64
-```
-
-Then uncomment the following line in your `Vagrantfile`:
-
-```ruby
-# Create a public network, which generally matched to bridged network.
-# Bridged networks make the machine appear as another physical device on
-# your network.
-config.vm.network "public_network"
-```
-
-And finally, bring the machine up:
-
-```console
 vagrant up
 ```
+
+A new VirtualBox VM will come up with the IP 192.168.33.10 (according to the included `Vagrantfile`).
 
 ### License
 Copyright (C) 2014 - 2015 Alan Orth
