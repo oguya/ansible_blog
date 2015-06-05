@@ -32,7 +32,7 @@ Not as simple as on GNU/Linux with KVM, but still easy:
 
     $ vagrant up
 
-A new VirtualBox VM will come up with the IP 192.168.33.10 (according to the included `Vagrantfile`).
+A new VirtualBox VM will come up with the IP 192.168.33.10.
 
 ### License
 Copyright (C) 2014 - 2015 Alan Orth
