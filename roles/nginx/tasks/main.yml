@@ -41,6 +41,7 @@
   template: src=blank-vhost.conf.j2 dest={{ nginx_confd_path }}/blank-vhost.conf  mode=0644 owner=root group=root
   notify:
     - reload nginx
+  tags: nginx
 
 - name: Configure munin vhost
   copy: src=munin.conf dest=/etc/nginx/conf.d/munin.conf mode=0644 owner=root group=root
